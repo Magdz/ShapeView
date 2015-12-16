@@ -1,5 +1,10 @@
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -66,9 +71,11 @@ public class GUI extends javax.swing.JFrame {
         BackPanel = new javax.swing.JPanel();
         ViewPanel = new javax.swing.JPanel();
         MenuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        FileMenu = new javax.swing.JMenu();
+        LoadShape = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Shape View v1.0");
 
         javax.swing.GroupLayout ViewPanelLayout = new javax.swing.GroupLayout(ViewPanel);
         ViewPanel.setLayout(ViewPanelLayout);
@@ -98,8 +105,18 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("File");
-        MenuBar.add(jMenu1);
+        FileMenu.setText("File");
+
+        LoadShape.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        LoadShape.setText("Load Shape");
+        LoadShape.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadShapeActionPerformed(evt);
+            }
+        });
+        FileMenu.add(LoadShape);
+
+        MenuBar.add(FileMenu);
 
         setJMenuBar(MenuBar);
 
@@ -115,12 +132,30 @@ public class GUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LoadShapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadShapeActionPerformed
+        JFileChooser FileChooser = new JFileChooser();
+        FileChooser.setCurrentDirectory(new File(""));
+        int retrival = FileChooser.showOpenDialog(null);
+        try{
+            if(FileChooser.getSelectedFile().getName().endsWith(".txt")){
+                if (retrival == JFileChooser.APPROVE_OPTION) {
+                    try{
+                        BufferedReader buff = new BufferedReader(new FileReader(FileChooser.getSelectedFile()));
+                        System.out.println(buff.readLine());
+                    }catch(Exception e){System.out.println("Can't Read File");}
+                }
+            }
+        }catch(Exception e){System.out.println("No Selected File");}
+    }//GEN-LAST:event_LoadShapeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackPanel;
+    private javax.swing.JMenu FileMenu;
+    private javax.swing.JMenuItem LoadShape;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JPanel ViewPanel;
-    private javax.swing.JMenu jMenu1;
     // End of variables declaration//GEN-END:variables
 }
