@@ -144,7 +144,7 @@ public class GUI extends javax.swing.JFrame {
                 if (retrival == JFileChooser.APPROVE_OPTION) {
                     try{
                         BufferedReader buff = new BufferedReader(new FileReader(FileChooser.getSelectedFile()));
-                        System.out.println(buff.readLine());
+                        Parser Parser = new Parser(buff);
                     }catch(Exception e){System.out.println("Can't Read File");}
                 }
             }
