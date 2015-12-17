@@ -1,0 +1,4 @@
+Rectangle:First,50,50,50,50,BLACK
+Rectangle:First,100,100,50,150,CYAN
+Square:Square,250,350,90,YELLOW
+Circle:C,200,130,60,RED
