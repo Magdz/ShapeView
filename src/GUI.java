@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -20,14 +21,18 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class GUI extends javax.swing.JFrame {
 
+    private final Canvas canvas;
     /**
      * Creates new form GUI
      */
     public GUI() {
         Theme();
         initComponents();
+        canvas = new Canvas();
         ViewPanel.setBackground(Color.WHITE);
         ViewPanel.setVisible(false);
+        ViewPanel.add(canvas);
+        canvas.setSize(ViewPanel.getSize());
         BackPanel.setBackground(Color.BLACK);
     }
 
@@ -81,28 +86,22 @@ public class GUI extends javax.swing.JFrame {
         ViewPanel.setLayout(ViewPanelLayout);
         ViewPanelLayout.setHorizontalGroup(
             ViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
         ViewPanelLayout.setVerticalGroup(
             ViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 379, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout BackPanelLayout = new javax.swing.GroupLayout(BackPanel);
         BackPanel.setLayout(BackPanelLayout);
         BackPanelLayout.setHorizontalGroup(
             BackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(ViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BackPanelLayout.setVerticalGroup(
             BackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BackPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(ViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         FileMenu.setText("File");
@@ -149,6 +148,8 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
         }catch(Exception e){System.out.println("No Selected File");}
+        repaint();
+        ViewPanel.setVisible(true);
     }//GEN-LAST:event_LoadShapeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
